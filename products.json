@@ -1,0 +1,29 @@
+[
+    {
+      "name": "accent chair",
+      "price": 25,
+      "company": "marcos",
+      "rating": 4,
+       "image":
+      "https://media.newhomeinc.com/348/2023/2/24/Morehead-Low-Country-1.1920x1440.jpg"
+   
+    },
+    {
+      "name": "albany sectional",
+      "price": 109,
+      "company": "liddy",
+      "rating": 5,
+       "image":
+      "https://media.newhomeinc.com/348/2023/2/24/Morehead-Low-Country-1.1920x1440.jpg"
+   
+    },
+    {
+      "name": "albany table",
+      "price": 309,
+      "company": "liddy",
+      "rating": 4.9,
+       "image": "https://media.newhomeinc.com/348/2023/2/24/Morehead-Low-Country-1.1920x1440.jpg"
+  
+    }
+  ]
+  
