@@ -1,8 +1,12 @@
 
-const User=require('../model/User')
-const SECRET_KEY='3elma'
-var jwt = require('jsonwebtoken')
+const jwt=require('jsonwebtoken')
+const dotenv=require('dotenv')
+dotenv.config() 
 const bcrypt = require("bcrypt")
+
+const User=require('../model/User')
+const key=process.env.SECRET_KEY
+
 const saltRounds = 10
 
 
@@ -26,7 +30,7 @@ try {
         return res.status(401).json({error:'wrong password'})
     }
 
-    const token=jwt.sign({userId:user._id},SECRET_KEY,{expiresIn:'1h'})
+    const token=jwt.sign({userId:user._id},key,{expiresIn:'1h'})
     res.status(200).json({token})
     console.log(token)
 
