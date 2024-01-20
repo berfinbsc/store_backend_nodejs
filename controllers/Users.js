@@ -65,7 +65,7 @@ const Register=async(req,res)=>{
 
 
 const LogOut=async(req,res)=>{
-//kullanıcının auth ıslemlerı
+//logout
 }
 
 module.exports={Login,LogOut,Register}
