@@ -1,12 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
-const {getAllProducts,getAllProductsStatic} = require('../controllers/Products')
+const {getAllProducts,} = require('../controllers/Products')
 const {Login, Register} = require('../controllers/Users')
 const { VerifyToken } = require('../middleware/VerifyToken')
 
-router.route('/').get(getAllProducts)
-router.route('/static').get(getAllProductsStatic)
+router.route('/products').get(getAllProducts)
 router.route('/login').post(Login)
 router.route('/register').post(Register)
 router.route('/about').get(VerifyToken,(req,res)=>{

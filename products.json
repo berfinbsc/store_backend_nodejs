@@ -1,29 +1,69 @@
 [
     {
-      "name": "accent chair",
+      "name": "Wish of Love",
       "price": 25,
-      "company": "marcos",
+      "brand": "Avon",
+      "gender":"Women",
+      "rating": 5.0,
+       "image":
+"https://cdn.dsmcdn.com/ty1096/product/media/images/prod/SPM/PIM/20231219/14/5aef79a1-4a49-3e35-a34d-12431e4c941e/1_org_zoom.jpg"   
+    },
+    {
+      "name": "Rare Amethyst",
+      "price": 109,
+      "brand": "Avon",
+      "gender":"Women",
+      "rating": 4.6,
+       "image":
+"https://cdn.dsmcdn.com/ty11/product/media/images/20200903/12/9483525/16804991/1/1_org_zoom.jpg"   
+    },
+    {
+      "name": "Love Potion",
+      "price": 309,
+      "brand": "Oriflame",
+      "gender":"Women",
+      "rating": 4.2,
+       "image":
+"https://cdn.dsmcdn.com/ty1093/product/media/images/prod/SPM/PIM/20231218/09/36ee3600-2b5c-33db-a191-6640936c09f9/1_org_zoom.jpg"  
+    }, 
+    
+    
+    {
+      "name": "Pandora",
+      "price": 25,
+      "brand": "Monlain",
+      "gender":"Women",
       "rating": 4,
        "image":
-      "https://media.newhomeinc.com/348/2023/2/24/Morehead-Low-Country-1.1920x1440.jpg"
-   
-    },
+"https://cdn.dsmcdn.com/ty1013/product/media/images/prod/SPM/PIM/20231012/20/9a0d9e2f-ecf8-3424-9a05-c2d47afbb043/1_org_zoom.jpg"   
+ },
     {
-      "name": "albany sectional",
+      "name": "Possess",
       "price": 109,
-      "company": "liddy",
-      "rating": 5,
+      "brand": "Oriflame",
+      "gender":"Men",
+      "rating": 3.8,
        "image":
-      "https://media.newhomeinc.com/348/2023/2/24/Morehead-Low-Country-1.1920x1440.jpg"
-   
+"https://cdn.dsmcdn.com/ty644/product/media/images/20221213/18/236316617/648298895/1/1_org_zoom.jpg"
+      },
+    {
+      "name": "Libre Eau",
+      "price": 309,
+      "brand": "Yves Saint Lauren",
+      "gender":"Men",
+      "rating": 3.4,
+       "image":
+"https://cdn.dsmcdn.com/ty1015/product/media/images/prod/SPM/PIM/20231014/23/47897b17-6db9-3204-b978-86339bd015b0/1_org_zoom.jpg"
     },
     {
-      "name": "albany table",
-      "price": 309,
-      "company": "liddy",
-      "rating": 4.9,
-       "image": "https://media.newhomeinc.com/348/2023/2/24/Morehead-Low-Country-1.1920x1440.jpg"
-  
-    }
+      "name": "Madame Duli Nea",
+      "price": 25,
+      "brand": "Monlain",
+      "gender":"Women",
+      "rating": 3.0,
+       "image":
+"https://cdn.dsmcdn.com/ty1143/product/media/images/prod/SPM/PIM/20240123/01/3b997958-5386-3e93-8822-7840f2693a5e/1_org_zoom.jpg"
+      }
+
   ]
   

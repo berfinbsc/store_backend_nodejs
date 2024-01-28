@@ -12,7 +12,7 @@ app.use(express.static('./public'));
 const cors = require('cors');
 app.use(cors());
 
-app.use('/api',productRouter)
+app.use('/api/v1',productRouter)
 
 
 const start = async()=>{

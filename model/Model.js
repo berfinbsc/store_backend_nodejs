@@ -17,23 +17,31 @@ featured : {
     default : false,
 },
 
-rating : {
-    type:Number,
-    default:4.5,
-},
 
 createdAt : {
     type : Date,
     default : Date.now(),
 },
  
-company : {
+brand : {
     type : String,
     enum : {
-        values : ['ikea','liddy','caressa','marcos'],
+        values : ['Avon','Oriflame','Pandora','Yves Saint Lauren','Monlain'],
         message : '{VALUE} is not supported',
     },
 },
+
+
+   gender:{
+    type:String,
+    enum:{values : ['Women','Men']},
+    required : [true,'gender must be provide']
+},
+
+rating : {
+    type:Number,
+},
+
 
 image :{
 type: String,
