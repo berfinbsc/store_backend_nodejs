@@ -4,7 +4,7 @@ dotenv.config()
 const express=require('express')
 const app=express();
 const connectDB =require('./db/Connect')
-const productRouter=require('./routes/RoueProduct')
+const routers=require('./routes/Routers')
 app.use(express.json());
 const port =process.env.PORT
 const url=process.env.MONGO_URI
@@ -12,7 +12,7 @@ app.use(express.static('./public'));
 const cors = require('cors');
 app.use(cors());
 
-app.use('/api/v1',productRouter)
+app.use('/api/v1',routers)
 
 
 const start = async()=>{
