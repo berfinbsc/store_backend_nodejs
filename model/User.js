@@ -16,11 +16,9 @@ password:{
 },
 
 liked : [{
-    type : mongoose.Schema.Types.ObjectId,
+    type :mongoose.Schema.Types.ObjectId,
     ref : 'Product',
 }]
-
-
 
 })
 

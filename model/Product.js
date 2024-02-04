@@ -48,11 +48,11 @@ type: String,
 required : [true,'image must be provide'],
 },
 
+likes : {
+    type : Number,
+    default : 0,
+}
 
-likes : [{
-    type : mongoose.Schema.Types.ObjectId,
-    ref : 'User',
-}],
 
 })
 
