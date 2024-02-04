@@ -18,7 +18,9 @@ password:{
 liked : [{
     type :mongoose.Schema.Types.ObjectId,
     ref : 'Product',
-}]
+    require : true ,
+
+}],
 
 })
 

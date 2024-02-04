@@ -48,11 +48,10 @@ type: String,
 required : [true,'image must be provide'],
 },
 
-likes : {
+likesCount : {
     type : Number,
     default : 0,
-}
-
+},
 
 })
 
