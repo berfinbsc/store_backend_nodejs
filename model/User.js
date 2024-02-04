@@ -1,4 +1,5 @@
 const mongoose =require('mongoose')
+const Product = require('./Product')
 
 const userShema=new mongoose.Schema({
 userName:{
@@ -13,6 +14,12 @@ password:{
     type:String,
     required:[true,'you must provide password'],
 },
+
+liked : [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'Product',
+}]
+
 
 
 })

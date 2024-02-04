@@ -1,47 +1,96 @@
 const Cart = require('../model/Cart')
 const Product = require('../model/Product')
 
-const getCart = async(req,res)=>{
+
+
+const reduceQuantity = async(req,res)=>{
+const {userId,productId} =req.body;
+const query = {userId : userId}
+0
+try {
+    const cart =await Cart.findOne(query)
+    const indexFound = cart.products.findIndex(p => p.productId==productId)
+
+if(indexFound !=-1) {
+    console.log("found")
+    if(cart.products[indexFound].quantity >1){
+        cart.products[indexFound].quantity -=1
+        await cart.save();
+        res.status(200).json(cart)
+    }
+    else if(cart.products[indexFound].quantity ==1)
+        cart.products.splice(indexFound,1)
+        await cart.save();
+        res.status(200).json(cart)
+    
+   
+}
+else if(indexFound ==-1){
+    console.log("not found")
+            res.status(400).json({message : "product not found in the cart"})
+}
+} catch (error) {
+    console.log(error)
+}
+
+
 
 
 }
 
-
-const deleteCart = async(req,res)=>{
-
-
-}
 
 
 const deleteItemFromCart =async(req,res)=>{
-  
+  const {userId,productId} =req.body;
+  const query = {userId : userId} 
+  const cart =await Cart.findOne(query)
+  const indexFound = cart.products.findIndex(p => p.productId==productId)
+  if(indexFound !=-1) {
+        cart.products.splice(indexFound,1)
+        await cart.save()   
+        res.status(200).json(cart)
+        console.log("indexFound : " + indexFound)  
 }
+else{  
+console.log("not found")
+            res.status(400).json({message : "product not found in the cart"})
+}
+}
+
+
+
+
 
 
 const addItemToCart = async(req,res)=>{
 
-let {userId,productId} =req.body;
-let quantity = req.body.quantity
+const {userId,productId} =req.body;
+const quantity = req.body.quantity || 1
+
 
 console.log("u : " + userId + " p : " + productId + " q : " + quantity)
 
 try {
-    let cart = await Cart.findOne({userId : userId}).exec()
-    let product = await Product.findById(productId)
+    const cart = await Cart.findOne({userId : userId}).exec()
+    const product = await Product.findById(productId)
     console.log("product : " + product + "cart : " + cart)
-    let {price} = product
+    const {price} = product
     if(cart){
         console.log("have a cart")
-        let indexFound =cart.products.findIndex(p => p.productId==productId)
-            if(indexFound !== -1){
+        const indexFound =cart.products.findIndex(p => p.productId==productId)
+        console.log("productId :  " + productId)
+        console.log("cart items : " + cart.products + "length : " + cart.products.length)
+        console.log("indexFound : " + indexFound)   
+            if(indexFound !=-1) {
                 console.log("have cart have product :  ")
 
                 cart.products[indexFound].quantity = cart.products[indexFound].quantity + quantity
                 cart.products[indexFound].total = cart.products[indexFound].price * cart.products[indexFound].quantity
                 cart.subTotal = cart.products.map(p =>p.total).reduce((acc,curr)=>acc + curr)
-
+                cart.save();
+                res.status(200).json(cart)
             }
-            else if (indexFound===-1) {
+            else if (indexFound==-1) {
                 console.log("have cart no product :  ")
                 cart.products.push({
                     productId : productId,
@@ -50,7 +99,8 @@ try {
                     total : price * quantity
                 })
                 cart.subTotal = cart.products.map(p =>p.total).reduce((acc,curr)=>acc + curr)
-
+                cart.save();
+                res.status(200).json(cart)
             }
 
             else{
@@ -87,4 +137,4 @@ console.log(err)
 
 }
 
-module.exports = {getCart,addItemToCart,deleteCart,deleteItemFromCart}
+module.exports = {addItemToCart,reduceQuantity,deleteItemFromCart}

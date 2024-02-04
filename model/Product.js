@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const User = require('./User')
 const productShema = new mongoose.Schema({
 
 name :{
@@ -49,7 +49,10 @@ required : [true,'image must be provide'],
 },
 
 
-
+likes : [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'User',
+}],
 
 })
 
