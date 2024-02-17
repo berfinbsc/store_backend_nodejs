@@ -77,9 +77,20 @@ console.log({msg : err})
 
 }
 
-
+const getOneProduct = async (req,res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ msg: "product not found" });
+    }
+    res.status(200).json({ product });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 
 module.exports={
-    getAllProducts};
+    getAllProducts,getOneProduct};
