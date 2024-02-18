@@ -16,7 +16,7 @@ router.route('/about').get(VerifyToken,(req,res)=>{
 
 })
 router.route('/getusers').get(getAllUser)
-router.route('/addtocart').post(addItemToCart)
+router.route('/addtocart').post(VerifyToken,addItemToCart)
 router.route('/deletefromcart').post(deleteItemFromCart)
 router.route('/reducequantity').post(reduceQuantity)
 router.route('/like').post(like)
