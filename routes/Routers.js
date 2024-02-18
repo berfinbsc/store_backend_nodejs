@@ -4,7 +4,7 @@ const router = express.Router()
 const {getAllProducts, getOneProduct,} = require('../controllers/Products')
 const {Login, Register, getAllUser} = require('../controllers/Users')
 const { VerifyToken } = require('../middleware/VerifyToken')
-const { addItemToCart, deleteItemFromCart, reduceQuantity, getCart } = require('../controllers/Cart')
+const { addItemToCart, deleteItemFromCart, reduceQuantity, getCart, increaseQuantity } = require('../controllers/Cart')
 const { like } = require('../controllers/Likes')
 
 router.route('/products').get(getAllProducts)
@@ -16,10 +16,13 @@ router.route('/about').get(VerifyToken,(req,res)=>{
 
 })
 router.route('/getusers').get(getAllUser)
-router.route('/addtocart').post(VerifyToken,addItemToCart)
-router.route('/getcart').get(VerifyToken,getCart)
-router.route('/deletefromcart').post(deleteItemFromCart)
-router.route('/reducequantity').post(reduceQuantity)
+
+router.route('/getCart').get(VerifyToken,getCart)
+router.route('/addToCart').post(VerifyToken,addItemToCart)
+router.route('/deleteFromcart').post(VerifyToken,deleteItemFromCart)
+router.route('/reduceQuantity').post(VerifyToken,reduceQuantity)
+router.route('/increaseQuantity').post(VerifyToken,increaseQuantity)
+
 router.route('/like').post(like)
 //router.route('/').get(getAllTasks).post(createTask)
 //router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask)

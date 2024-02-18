@@ -24,9 +24,12 @@ try {
 
 
 const reduceQuantity = async(req,res)=>{
-const {userId,productId} =req.body;
-const query = {userId : userId}
-0
+    const {productId} =req.body;
+    const userId =req.userId;
+    const query = {userId : userId}
+    console.log("product id : : " + productId);
+    console.log("user id : : " + userId);
+
 try {
     const cart =await Cart.findOne(query)
     const indexFound = cart.products.findIndex(p => p.productId==productId)
@@ -51,18 +54,64 @@ else if(indexFound ==-1){
 }
 } catch (error) {
     console.log(error)
-}
+}}
 
 
 
 
-}
+
+const increaseQuantity = async(req,res)=>{
+
+    const {productId} =req.body;
+    const userId =req.userId;
+    const query = {userId : userId}
+    console.log("product id : : " + productId);
+    console.log("user id : : " + userId);
+
+    
+
+    try {
+        const cart =await Cart.findOne(query)
+        const indexFound = cart.products.findIndex(p => p.productId==productId)
+    
+    if(indexFound !=-1) {
+        console.log("found")
+        if(cart.products[indexFound].quantity <5){
+            cart.products[indexFound].quantity +=1
+            await cart.save();
+            res.status(200).json(cart)
+        }
+        else {
+           console.log("max quantity is 5");
+            res.status(200).json({msg : "max quantity is 5"});
+        } }
+
+    else if(indexFound ==-1){
+        console.log("not found")
+                res.status(400).json({message : "product not found in the cart"})
+    }
+    } catch (error) {
+        console.log(error)
+    }}
+
+
+
+
+
+
+
 
 
 
 const deleteItemFromCart =async(req,res)=>{
-  const {userId,productId} =req.body;
-  const query = {userId : userId} 
+
+    const {productId} =req.body;
+    const userId =req.userId;
+    const query = {userId : userId}
+    console.log("product id : : " + productId);
+    console.log("user id : : " + userId);
+  
+  
   const cart =await Cart.findOne(query)
   const indexFound = cart.products.findIndex(p => p.productId==productId)
   if(indexFound !=-1) {
@@ -74,8 +123,7 @@ const deleteItemFromCart =async(req,res)=>{
 else{  
 console.log("not found")
             res.status(400).json({message : "product not found in the cart"})
-}
-}
+}}
 
 
 
@@ -84,12 +132,16 @@ console.log("not found")
 
 const addItemToCart = async(req,res)=>{
 
-const {userId,productId} =req.body;
-const quantity = req.body.quantity || 1
+    const {productId} =req.body;
+    const userId =req.userId;
+    const query = {userId : userId}
+    console.log("product id : : " + productId);
+    console.log("user id : : " + userId);
+    const quantity = req.body.quantity || 1
 
 
 try {
-    const cart = await Cart.findOne({userId : userId}).exec()
+    const cart = await Cart.findOne(query)
     const product = await Product.findById(productId)
     const {price} = product
 
@@ -97,13 +149,19 @@ try {
         const indexFound =cart.products.findIndex(p => p.productId==productId)
         
             if(indexFound !=-1) {
-                console.log("have cart have product :  ")
-
-                cart.products[indexFound].quantity = cart.products[indexFound].quantity + quantity
+                console.log("have cart have product b :  ")
+                if(cart.products[indexFound].quantity + quantity <5){
+                    cart.products[indexFound].quantity = cart.products[indexFound].quantity + quantity
                 cart.products[indexFound].total = cart.products[indexFound].price * cart.products[indexFound].quantity
                 cart.subTotal = cart.products.map(p =>p.total).reduce((acc,curr)=>acc + curr)
                 cart.save();
                 res.status(200).json(cart)
+                }
+                else{
+                    console.log("max quantity is 5");
+                    res.status(200).json({msg : "max quantity is 5"});
+                }
+                
             }
             else if (indexFound==-1) {
                 console.log("have cart no product :  ")
@@ -124,9 +182,7 @@ try {
                 return res.status(400).json({
                     error0 : 400,
                     messgae : "invalid request" 
-                })
-            }
-    }
+                })}}
     else {
         console.log("no cart yet")
         let cartData = ({
@@ -156,4 +212,4 @@ console.log(err)
 
 }
 
-module.exports = {addItemToCart,reduceQuantity,deleteItemFromCart,getCart}
+module.exports = {addItemToCart,reduceQuantity,deleteItemFromCart,getCart,increaseQuantity}
