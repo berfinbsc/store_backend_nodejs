@@ -3,6 +3,26 @@ const Product = require('../model/Product')
 
 
 
+const getCart = async(req,res)=>{
+
+try {
+    const userId = req.userId;
+    const cart = await Cart.findOne({userId : userId}).exec()
+    console.log("USER ID : " + userId)
+    console.log("CART : " + cart)
+    res.status(200).json({cart})
+
+} catch (error) {
+    console.log(error)
+    res.status(500).json({msg : "bsc : user cant found "})
+}
+
+
+}
+
+
+
+
 const reduceQuantity = async(req,res)=>{
 const {userId,productId} =req.body;
 const query = {userId : userId}
@@ -68,19 +88,14 @@ const {userId,productId} =req.body;
 const quantity = req.body.quantity || 1
 
 
-console.log("u : " + userId + " p : " + productId + " q : " + quantity)
-
 try {
     const cart = await Cart.findOne({userId : userId}).exec()
     const product = await Product.findById(productId)
-    console.log("product : " + product + "cart : " + cart)
     const {price} = product
+
     if(cart){
-        console.log("have a cart")
         const indexFound =cart.products.findIndex(p => p.productId==productId)
-        console.log("productId :  " + productId)
-        console.log("cart items : " + cart.products + "length : " + cart.products.length)
-        console.log("indexFound : " + indexFound)   
+        
             if(indexFound !=-1) {
                 console.log("have cart have product :  ")
 
@@ -95,6 +110,8 @@ try {
                 cart.products.push({
                     productId : productId,
                     quantity : quantity,
+                    productName : product.name,
+                    image : product.image,
                     price : price,
                     total : price * quantity
                 })
@@ -117,6 +134,8 @@ try {
             products:[{
                 productId : productId,
                 quantity : quantity,
+                productName : product.name,
+                image : product.image,
                 price : price,
                 total :price * quantity
             }],
@@ -137,4 +156,4 @@ console.log(err)
 
 }
 
-module.exports = {addItemToCart,reduceQuantity,deleteItemFromCart}
+module.exports = {addItemToCart,reduceQuantity,deleteItemFromCart,getCart}

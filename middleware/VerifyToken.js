@@ -9,7 +9,7 @@ const VerifyToken = (req,res,next)=>{
 
    const authHeader=  req.header('Authorization');
     if(!authHeader)
-    return res.status(401).json({error:'Access denied'})
+    return res.status(401).json({error:'bsc : Access denied'})
     if(!authHeader.startsWith('Bearer '))
     return res.status(401).json({error:'token düzgün değil'})
 
@@ -23,6 +23,7 @@ try {
     const user=User.findById(userId)
     if(!user) return res.status(401).json({message:'user not avaliable'})
     req.userId=userId
+console.log("user id : "+userId)
     next()
 } catch (error) {
     res.status(401).json({error})

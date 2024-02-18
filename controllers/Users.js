@@ -30,7 +30,7 @@ try {
         return res.status(401).json({error:'wrong password'})
     }
 
-    const token=jwt.sign({userId:user._id},key,{expiresIn:'1h'})
+    const token=jwt.sign({userId:user._id},key,{expiresIn:'24h'})
     res.status(200).json({token})
     console.log(token)
 
