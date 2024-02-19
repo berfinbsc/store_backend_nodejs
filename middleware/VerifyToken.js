@@ -6,7 +6,8 @@ const User = require('../model/User')
 const key=process.env.SECRET_KEY
 
 const VerifyToken = (req,res,next)=>{
-
+    
+console.log("verify : : " + req.header('Authorization'))
    const authHeader=  req.header('Authorization');
     if(!authHeader)
     return res.status(401).json({error:'bsc : Access denied'})
