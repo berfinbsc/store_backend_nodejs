@@ -29,12 +29,11 @@ const reduceQuantity = async(req,res)=>{
     const {productId} =req.body;
     const userId =req.userId;
     const query = {userId : userId}
-    console.log("product id : : " + productId);
-    console.log("user id : : " + userId);
+  
 
 try {
     const cart =await Cart.findOne(query)
-    const indexFound = cart.products.findIndex(p => p.productId==productId)
+    const indexFound = await cart.products.findIndex(p => p.productId==productId)
  
 if(indexFound !=-1) {
   
@@ -49,18 +48,10 @@ if(indexFound !=-1) {
         console.log("cart product : " + cartItem);
         res.status(200).json(cartItem)
     }
-    else if(cart.products[indexFound].quantity ==1)
-            if(cart.products.length ==1){
-                await Cart.deleteOne(query);
-                res.status(200).json({message : "cart is empty"})
-            }
-            else{
-                cart.products.splice(indexFound,1)
-                cart.subTotal = await cart.products.map(p =>p.total).reduce((acc,curr)=>acc + curr)
-                const cartSave = await cart.save();
-                res.status(200).json(cartSave)
-            }
-        
+    else if(cart.products[indexFound].quantity ===1){
+        const cartItem = await cart.products[indexFound];
+        res.status(200).json(cartItem)
+    }
     
    
 }
@@ -80,21 +71,17 @@ const increaseQuantity = async(req,res)=>{
 
     const {productId} =req.body;
     const userId =req.userId;
-    const query = {userId : userId}
-    console.log("product id : : " + productId);
-    console.log("user id : : " + userId);
-
-    
+    const query = {userId : userId} 
 
     try {
         const cart =await Cart.findOne(query)
         const indexFound = cart.products.findIndex(p => p.productId==productId)
     
-    if(indexFound !=-1) {
+    if(indexFound !==-1) {
         console.log("found")
         if(cart.products[indexFound].quantity <5){
             cart.products[indexFound].quantity +=1
-            cart.products[indexFound].total = cart.products[indexFound].quantity * cart.products[indexFound].price;
+            cart.products[indexFound].total = await cart.products[indexFound].quantity * cart.products[indexFound].price;
             cart.subTotal = await cart.products.map(p =>p.total).reduce((acc,curr)=>acc + curr)
             const cartSave = await cart.save();
             const cartItem = cartSave.products[indexFound];
@@ -103,7 +90,8 @@ const increaseQuantity = async(req,res)=>{
         }
         else {
            console.log("max quantity is 5");
-            res.status(200).json({msg : "max quantity is 5"});
+           const cartItem = await cart.products[indexFound];
+            res.status(200).json(cartItem);
         } }
 
     else if(indexFound ==-1){
