@@ -80,12 +80,14 @@ const increaseQuantity = async(req,res)=>{
     if(indexFound !==-1) {
         console.log("found")
         if(cart.products[indexFound].quantity <5){
-            cart.products[indexFound].quantity +=1
+
+            cart.products[indexFound].quantity += await 1
             cart.products[indexFound].total = await cart.products[indexFound].quantity * cart.products[indexFound].price;
             cart.subTotal = await cart.products.map(p =>p.total).reduce((acc,curr)=>acc + curr)
             const cartSave = await cart.save();
-            const cartItem = cartSave.products[indexFound];
-            console.log("cart product : " + cartItem);
+            const cartItem = await cartSave.products[indexFound];
+            console.log("cart product : :" + cartItem);
+            console.log("cartSave product : :" + cartSave);
             res.status(200).json(cartItem)
         }
         else {

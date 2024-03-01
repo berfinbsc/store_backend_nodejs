@@ -17,7 +17,7 @@ const like = async (req, res) => {
         }
     
     //user already liked this product?
-        const finIndex = user.liked.findIndex(p=>p==productId)
+        const finIndex = user.liked.findIndex(p=>p._id==productId)
         if(finIndex!== -1){
             console.log("user already liked this product")
             user.liked.pull(productId);
