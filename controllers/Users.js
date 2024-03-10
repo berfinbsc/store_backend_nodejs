@@ -10,7 +10,7 @@ const key=process.env.SECRET_KEY
 const saltRounds = 10
 
 
-const Login= async (req,res)=>{
+ const Login= async (req,res)=>{
 try {
     
     const {email,password}=req.body
@@ -43,7 +43,7 @@ try {
 
 
 
-const Register=async(req,res)=>{
+ const Register=async(req,res)=>{
 
  try{
 
@@ -64,10 +64,27 @@ const Register=async(req,res)=>{
 }  
 
 
-const getAllUser=async(req,res)=>{
+  const getUser=async(req,res)=>{
+    
+const {userId}=req;
+try {
+    console.log("oooooooooooooooooooooo" + userId);
+    const user = await User.findById(userId);
+    if(!user){
+        return res.status(401).json({error:'user not avaliable'})
+    }
+    res.status(200).json(user);
+} catch (error) {
+    res.status(500).json({error: 'get user failed'})
+}
+
+    }
+    
+
+     const getAllUser=async(req,res)=>{
 const users = await User.find();
 console.log(users)
 res.status(200).json(users)
 }
 
-module.exports={Login,Register,getAllUser}
+    module.exports={Login,Register,getUser,getAllUser}
