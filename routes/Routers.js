@@ -24,7 +24,7 @@ router.route('/deleteFromcart').post(VerifyToken,deleteItemFromCart)
 router.route('/reduceQuantity').post(VerifyToken,reduceQuantity)
 router.route('/increaseQuantity').post(VerifyToken,increaseQuantity)
 
-router.route('/like').post(like)
+router.route('/like').post(VerifyToken,like)
 //router.route('/').get(getAllTasks).post(createTask)
 //router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask)
 

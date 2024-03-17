@@ -5,7 +5,9 @@ const like = async (req, res) => {
     
     try {
         
-        const {productId,userId} = req.body;
+        const {productId} = req.body;
+        const userId = req.userId;
+
         const product= await Product.findById(productId);
         const user = await User.findById(userId);
     
@@ -24,7 +26,7 @@ const like = async (req, res) => {
             await user.save();
             product.likesCount -=1;
             await product.save();
-            return res.status(200).json({productLikes : product.likesCount,userLikes : user.liked.length})
+            return res.status(200).json(user.liked);
         }
     //user not liked this product?
        else{
@@ -33,7 +35,7 @@ const like = async (req, res) => {
         await user.save();
         product.likesCount +=1;
         await product.save();
-        return res.status(200).json({productLikes : product.likesCount,userLikes : user.liked.length})
+        return res.status(200).json(user.liked);
     
        }
 
