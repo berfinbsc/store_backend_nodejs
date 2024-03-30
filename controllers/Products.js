@@ -3,7 +3,11 @@ const express =require('express')
 express.json()
 
 const getAllProducts =async(req,res)=>{
+
   const queryObject={}
+
+
+// 
 const numericFilter = (queryFilter)=>{
   const regeEx =/\b(<|>|>=|=|<|<=)\b/g;
   const operatorMap={
@@ -76,6 +80,21 @@ console.log({msg : err})
 }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const getOneProduct = async (req,res) => {
   try {

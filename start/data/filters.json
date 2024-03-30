@@ -1,0 +1,44 @@
+[
+    {
+        "category": "brand",
+        "values": [
+            "Monlain",
+            "Yves Saint Lauren",
+            "Oriflame",
+            "Avon"
+
+
+        ]
+    },
+    {
+        "category": "gender",
+        "values": [
+            "Woman",
+            "Man"
+        ]
+    },
+    {
+        "category": "price",
+        "values": [
+            "0-100",
+            "100-200",
+            "200-300",
+            "300-400",
+            "400-500",
+            "500-600",
+            "600-700"
+            
+        ]
+    },
+    {
+        "category": "rating",
+        "values": [
+            "0-1",
+            "1-2",
+            "2-3",
+            "3-4",
+            "4-5"
+            
+        ]
+    }
+]

@@ -6,6 +6,7 @@ const {Login, Register, getAllUser, getUser} = require('../controllers/Users')
 const { VerifyToken } = require('../middleware/VerifyToken')
 const { addItemToCart, deleteItemFromCart, reduceQuantity, getCart, increaseQuantity } = require('../controllers/Cart')
 const { like } = require('../controllers/Likes')
+const { getFilter, addFilter } = require('../controllers/Filter')
 
 router.route('/products').get(getAllProducts)
 router.route('/product/:productId').get(getOneProduct)
@@ -23,8 +24,11 @@ router.route('/addToCart').post(VerifyToken,addItemToCart)
 router.route('/deleteFromcart').post(VerifyToken,deleteItemFromCart)
 router.route('/reduceQuantity').post(VerifyToken,reduceQuantity)
 router.route('/increaseQuantity').post(VerifyToken,increaseQuantity)
-
 router.route('/like').post(VerifyToken,like)
+
+router.route('/filters').get(getFilter).post(addFilter)
+//add filter is only for admin
+
 //router.route('/').get(getAllTasks).post(createTask)
 //router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask)
 

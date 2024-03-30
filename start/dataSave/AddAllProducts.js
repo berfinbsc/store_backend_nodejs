@@ -1,9 +1,9 @@
 const dotenv=require('dotenv')
 dotenv.config()
-const connectDB =require('./db/Connect')
+const connectDB =require('../../dataBase/Connect')
 const url=process.env.MONGO_URI
-const Product=require('./model/Product')
-const jsonData=require('./products.json')
+const Product=require('../../model/Product')
+const jsonData=require('../../products.json')
 const startAdd = async()=>{
 
 try{

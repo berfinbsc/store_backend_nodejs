@@ -3,7 +3,7 @@ const dotenv=require('dotenv')
 dotenv.config() 
 const express=require('express')
 const app=express();
-const connectDB =require('./db/Connect')
+const connectDB =require('./dataBase/Connect')
 const routers=require('./routes/Routers')
 app.use(express.json());
 const port =process.env.PORT
